@@ -10,3 +10,31 @@
     margin-left: 10px;
     border-radius: 999px;
 }
+
+.friend__list__feed {
+    display: flex;
+    padding: 15px 20px;
+}
+
+.friend__list__grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-gap: 1rem;
+}
+
+@media (min-width: 384px) {
+    .friend__list__grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media (min-width: 600px) {
+    .friend__list__grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+@media (min-width: 768px) {
+    .friend__list__grid {
+        grid-template-columns: repeat(6, 1fr);
+    }
+}

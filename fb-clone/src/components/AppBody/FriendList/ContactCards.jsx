@@ -1,8 +1,13 @@
-const ContactCards = () => {
+import React from 'react';
+import './ContactCards.css';
+import { Avatar } from '@mui/material';
+
+function ContactCards({ image, profileSrc, title }) {
     return (
-        <> 
-            <h1>Friend List Page Placeholder!</h1>
-        </>
+        <div style={{ backgroundImage: `url(${image})` }}  className="contact__avatar">
+            <Avatar src={profileSrc} className="profile__picture" />
+            <h4> {title} </h4>
+        </div>
     );
 }
 

@@ -5,3 +5,8 @@
 .app__body {
     display: flex;
 }
+
+.app__body > sidebar {
+    position: sticky;
+    top: 0;
+}

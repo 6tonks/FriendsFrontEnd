@@ -45,20 +45,20 @@ function Header() {
             <div className="header__right">
                 <div className="header__info">
                     <Avatar />
-                <h4> test acc </h4>
+                    <h4> test_acc </h4>
                 </div>
-                    <IconButton>
-                        <AddIcon />
-                    </IconButton>
-                    <IconButton>
-                        <ForumIcon />
-                    </IconButton>
-                    <IconButton>
-                        <NotificationsActiveIcon />
-                    </IconButton>
-                    <IconButton>
-                        <ExpandMoreIcon />
-                    </IconButton>
+                <IconButton>
+                    <AddIcon />
+                </IconButton>
+                <IconButton>
+                    <ForumIcon />
+                </IconButton>
+                <IconButton>
+                    <NotificationsActiveIcon />
+                </IconButton>
+                <IconButton>
+                    <ExpandMoreIcon />
+                </IconButton>
             </div>
         </div>
     );
