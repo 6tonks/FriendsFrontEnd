@@ -10,6 +10,7 @@ import AddIcon from '@mui/icons-material/Add';
 import ForumIcon from '@mui/icons-material/Forum';
 import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import {Link} from 'react-router-dom';
 
 
 function Header() {
@@ -35,9 +36,11 @@ function Header() {
                 <div className="header__option">
                     <StorefrontOutlinedIcon fontSize="large" />
                 </div>
-                <div className="header__option header__option--active">
-                    <SupervisedUserCirceIcon fontSize="large" />
-                </div>
+                <Link to="/" className="hyperlink__style">
+                    <div className="header__option header__option--active">
+                        <SupervisedUserCirceIcon fontSize="large" />
+                    </div>
+                </Link>
             </div>
             <div className="header__right">
                 <div className="header__info">

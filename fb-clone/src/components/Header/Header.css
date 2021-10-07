@@ -65,6 +65,11 @@
     cursor: pointer;
 }
 
+.hyperlink__style {
+    color: inherit;
+    text-decoration: inherit;
+}
+
 .header__option:hover {
     background-color: #eff2f5;
     border-radius: 10px;
