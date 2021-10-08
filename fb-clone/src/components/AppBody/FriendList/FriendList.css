@@ -28,13 +28,8 @@
         grid-template-columns: repeat(2, 1fr);
     }
 }
-@media (min-width: 600px) {
-    .friend__list__grid {
-        grid-template-columns: repeat(4, 1fr);
-    }
-}
 @media (min-width: 768px) {
     .friend__list__grid {
-        grid-template-columns: repeat(6, 1fr);
+        grid-template-columns: repeat(4, 1fr);
     }
 }

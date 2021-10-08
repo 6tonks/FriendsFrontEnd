@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import './Header.css';
 import SearchIcon from '@mui/icons-material/Search';
 import HomeIcon from '@mui/icons-material/Home';
@@ -14,6 +14,21 @@ import {Link} from 'react-router-dom';
 
 
 function Header() {
+    useEffect(() => {
+        fetchItems();
+    }, []);
+
+    const [items, setItems] = useState([]);
+
+    const fetchItems = async() => {
+        const data = await fetch(
+            'https://randomuser.me/api/?nat=us&randomapi'
+        );
+
+        const items = await data.json();
+        setItems(items.results);
+    };
+
     return (
         <div className="header">
             <div className="header__left">
@@ -45,7 +60,7 @@ function Header() {
             <div className="header__right">
                 <div className="header__info">
                     <Avatar />
-                    <h4> test_acc </h4>
+                    <h4> {items.map(item => item.login.username)} </h4>
                 </div>
                 <IconButton>
                     <AddIcon />
