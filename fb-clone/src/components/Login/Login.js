@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { React, useState } from 'react'
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -12,6 +12,8 @@ import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+import LoginGoogle from '../LoginGoogle/LoginGoogle';
 
 import PropTypes from 'prop-types';
 
@@ -42,18 +44,27 @@ function Login({ setToken }) {
     const handleSubmit = async (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        // console.log(data);
         // eslint-disable-next-line no-console
-        // const token = await loginUser({
-        //     email: data.get('email'),
-        //     password: data.get('password'),
-        // });
+        const token = await loginUser({
+            email: data.get('email'),
+            password: data.get('password'),
+        });
         console.log({
             email: data.get('email'),
             password: data.get('password'),
         });
-        // setToken(token["Authentication Token"]);
-        setToken("eXxO4yDSP3gVHGX044HSHZoxyxVJtvFdknWc3Y_hrhmHwfyl6uH1Hbpw0FVC961Nuo1MqwyUaXmf9aw08xo2EA")
+        setToken(token["Authentication Token"]);
+    };
+
+    const [loginData, setLoginData] = useState(
+        localStorage.getItem('loginData')
+        ? JSON.parse(localStorage.getItem('loginData'))
+        : null
+    );
+
+    const handleGoogle = async (googleData) => {
+        googleData.preventDefault();
+        setToken(loginData.access_token);
     };
 
     return (
@@ -84,6 +95,9 @@ function Login({ setToken }) {
                             alignItems: 'center',
                         }}
                     >
+                        <Grid onClick={handleGoogle} >
+                            <LoginGoogle />
+                        </Grid>
                         <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
                             <LockOutlinedIcon />
                         </Avatar>
@@ -140,6 +154,7 @@ function Login({ setToken }) {
                     </Box>
                 </Grid>
             </Grid>
+            <code>{JSON.stringify(loginData)}</code>
         </ThemeProvider>
     );
 }

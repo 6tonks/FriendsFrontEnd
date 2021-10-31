@@ -58,7 +58,7 @@ function Header() {
                 </Link>
             </div>
             <div className="header__right">
-                <Link to="/login" className="hyperlink__style">
+                <Link to="/logout" className="hyperlink__style">
                     <div className="header__info">
                         <Avatar />
                         <h4> {items.map(item => item.login.username)} </h4>

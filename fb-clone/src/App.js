@@ -7,6 +7,7 @@ import FriendList from './components/AppBody/FriendList/FriendList';
 import FriendRequest from './components/AppBody/FriendRequest/FriendRequest';
 import InviteFriend from './components/AppBody/InviteFriend/InviteFriend';
 import Login from './components/Login/Login';
+import Logout from './components/Login/Logout';
 
 function App() {
   const [token, setToken] = useState();
@@ -26,6 +27,7 @@ function App() {
                   <Route path="/friends" exact component={FriendList} />
                   <Route path="/friends/requests" exact component={FriendRequest} />
                   <Route path="/friends/invite" exact component={InviteFriend} />
+                  <Route path="/logout" exact component={Logout} />
                 </Switch>
                 { /* Widget */ }
             </div>
