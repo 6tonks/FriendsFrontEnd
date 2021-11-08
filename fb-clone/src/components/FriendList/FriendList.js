@@ -18,8 +18,8 @@ const FriendList = () => {
 
     const fetchItems = async() => {
         const data = await fetch(
-            'https://randomuser.me/api/?nat=us&randomapi&results=30'
-            // 'http://friends-service-env.eba-cpwd9pmm.us-west-2.elasticbeanstalk.com/friends/heavycat159'
+            // 'https://randomuser.me/api/?nat=us&randomapi&results=30'
+            'http://friends-service-env.eba-cpwd9pmm.us-west-2.elasticbeanstalk.com/friends/heavycat159'
         );
 
         const items = await data.json();

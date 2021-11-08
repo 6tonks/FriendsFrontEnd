@@ -11,6 +11,7 @@ import ForumIcon from '@mui/icons-material/Forum';
 import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import {Link} from 'react-router-dom';
+import Button from '@mui/material/Button';
 
 
 function Header() {
@@ -27,6 +28,11 @@ function Header() {
 
         const items = await data.json();
         setItems(items.results);
+    };
+
+    const logout = () => {
+        localStorage.removeItem('token');
+        window.location.reload(false);
     };
 
     return (
@@ -58,12 +64,13 @@ function Header() {
                 </Link>
             </div>
             <div className="header__right">
-                <Link to="/logout" className="hyperlink__style">
-                    <div className="header__info">
-                        <Avatar />
-                        <h4> {items.map(item => item.login.username)} </h4>
-                    </div>
-                </Link>
+                <div className="header__info">
+                    <Avatar />
+                    <h4> {items.map(item => item.login.username)} </h4>
+                    <Button onClick={logout}>
+                        LOGOUT
+                    </Button>
+                </div>
                 <IconButton>
                     <AddIcon />
                 </IconButton>

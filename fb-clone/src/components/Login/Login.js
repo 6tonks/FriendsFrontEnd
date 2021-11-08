@@ -1,5 +1,4 @@
-import { React, useState } from 'react'
-import Avatar from '@mui/material/Avatar';
+import React, { useState } from 'react'
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
@@ -9,12 +8,8 @@ import Link from '@mui/material/Link';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-
-import LoginGoogle from '../LoginGoogle/LoginGoogle';
-
 import PropTypes from 'prop-types';
 
 function Copyright(props) {
@@ -33,13 +28,18 @@ function Copyright(props) {
 const theme = createTheme();
 
 async function loginUser(credentials) {
-    var url = new URL('http://ec2-54-166-142-102.compute-1.amazonaws.com:5000/users/auth')
-    
+    // var url = new URL('http://ec2-54-166-142-102.compute-1.amazonaws.com:5000/users/auth')
+    var url = new URL('http://127.0.0.2:5000/users/auth')
+
     url.search = new URLSearchParams(credentials).toString();
 
     return fetch(url).then(data => data.json())
 }
-function Login({ setToken }) {
+
+export default function Login({ setToken }) {
+
+    const [email, setUserName] = useState();
+    const [password, setPassword] = useState();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -61,11 +61,6 @@ function Login({ setToken }) {
         ? JSON.parse(localStorage.getItem('loginData'))
         : null
     );
-
-    const handleGoogle = async (googleData) => {
-        googleData.preventDefault();
-        setToken(loginData.access_token);
-    };
 
     return (
         <ThemeProvider theme={theme}>
@@ -95,12 +90,6 @@ function Login({ setToken }) {
                             alignItems: 'center',
                         }}
                     >
-                        <Grid onClick={handleGoogle} >
-                            <LoginGoogle />
-                        </Grid>
-                        <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-                            <LockOutlinedIcon />
-                        </Avatar>
                         <Typography component="h1" variant="h5">
                             Sign in
                         </Typography>
@@ -159,7 +148,6 @@ function Login({ setToken }) {
     );
 }
 
-export default Login;
 Login.propTypes = {
     setToken: PropTypes.func.isRequired
 }
