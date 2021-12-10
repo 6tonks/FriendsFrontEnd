@@ -9,23 +9,16 @@ const FriendList = () => {
 
     useEffect(() => {
         fetchItems();
-        // fetch('https://randomuser.me/api/?nat=us&randomapi&results=30')
-        // fetch('http://friends-service-env.eba-cpwd9pmm.us-west-2.elasticbeanstalk.com/friends/heavycat159')
-        // .then(response => response.json())
-        // .then(jsondata => setItems(jsondata))
-        // .then(message => console.log(message));
     }, []);
 
     async function getUserDetail(userID) {
-        // var url = new URL('https://d2kjnw8vmxc1wq.cloudfront.net/api/users/' + userID)
-        var url = new URL('http://192.168.0.8:5000/users/' + userID)
+        var url = new URL('https://d2kjnw8vmxc1wq.cloudfront.net/api/users/' + userID)
         
         return fetch(url).then(data => data.json())
     }
 
     const fetchItems = async() => {
         const data = await fetch(
-            // 'https://randomuser.me/api/?nat=us&randomapi&results=30'
             'https://d2kjnw8vmxc1wq.cloudfront.net/api/friends/' + localStorage.getItem('user_id')
         ).then(data => data.json());
 

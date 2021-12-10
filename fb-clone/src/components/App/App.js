@@ -25,25 +25,25 @@ function App() {
       <Header />
           <Switch>
               <Route path="/login" exact component={Login} />
-              <Route path="/friends">
+              <Route path="/friends" exact >
                 <div className="app__body">
                   <Sidebar />
                   <FriendList/>
                 </div>
               </Route>
-              <Route path="/friends/requests">
+              <Route path="/friends/requests" exact >
                 <div className="app__body">
                   <Sidebar />
                   <FriendRequest/>
                 </div>
               </Route>
-              <Route path="/friends/invite">
+              <Route path="/friends/invite" exact >
                 <div className="app__body">
                   <Sidebar />
                   <InviteFriend/>
                 </div>
               </Route>
-              <Route path="/money">
+              <Route path="/money" exact>
                 <div className="app__body">
                   <SidebarMoney/>
                   <MoneyAccount/>

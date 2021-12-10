@@ -57,7 +57,7 @@ function Header() {
                     </div>
                 </Link>
                 <Link to="/friends" className="hyperlink__style">
-                    <div className="header__option header__option--active">
+                    <div className="header__option">
                         <SupervisedUserCirceIcon fontSize="large" />
                     </div>
                 </Link>

@@ -34,7 +34,7 @@ const MoneyAccount = () => (
               sm={6}
               xs={12}
             >
-              50
+              
             </Grid>
             <Grid
               item
