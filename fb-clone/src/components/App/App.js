@@ -11,6 +11,7 @@ import useToken from './useToken';
 import useUser from './useUser';
 import MoneyAccount from '../MoneyManagement/MoneyAccount';
 import SidebarMoney from '../SidebarMoney/SidebarMoney';
+import StockPortfolio from '../StockPortfolio/StockPortfolio';
 
 function App() {
   const { token, setToken } = useToken();
@@ -47,6 +48,12 @@ function App() {
                 <div className="app__body">
                   <SidebarMoney/>
                   <MoneyAccount/>
+                </div>
+              </Route>
+              <Route path="/portfolio" exact>
+                <div className="app__body">
+                  <SidebarMoney/>
+                  <StockPortfolio/>
                 </div>
               </Route>
           </Switch>
