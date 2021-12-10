@@ -54,10 +54,12 @@ function Header() {
                 <div className="header__option">
                     <FlagIcon fontSize="large" />
                 </div>
-                <div className="header__option">
-                    <StorefrontOutlinedIcon fontSize="large" />
-                </div>
-                <Link to="/" className="hyperlink__style">
+                <Link to="/money" className="hyperlink__style">
+                    <div className="header__option">
+                        <StorefrontOutlinedIcon fontSize="large" />
+                    </div>
+                </Link>
+                <Link to="/friends" className="hyperlink__style">
                     <div className="header__option header__option--active">
                         <SupervisedUserCirceIcon fontSize="large" />
                     </div>

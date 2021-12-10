@@ -28,8 +28,7 @@ function Copyright(props) {
 const theme = createTheme();
 
 async function loginUser(credentials) {
-    // var url = new URL('https://d2kjnw8vmxc1wq.cloudfront.net/api/users/auth')
-    var url = new URL('http://192.168.0.8:5000/users/auth')
+    var url = new URL(' https://z4sr5g47u6.execute-api.us-east-1.amazonaws.com/api/users/auth')
     
     url.search = new URLSearchParams(credentials).toString();
 
@@ -37,8 +36,7 @@ async function loginUser(credentials) {
 }
 
 async function getUserDetail(userID) {
-    // var url = new URL('https://d2kjnw8vmxc1wq.cloudfront.net/api/users/' + userID)
-    var url = new URL('http://192.168.0.8:5000/users/' + userID)
+    var url = new URL(' https://z4sr5g47u6.execute-api.us-east-1.amazonaws.com/api/users/' + userID)
     
     return fetch(url).then(data => data.json())
 }
