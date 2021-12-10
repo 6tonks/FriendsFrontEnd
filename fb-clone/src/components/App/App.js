@@ -8,11 +8,13 @@ import FriendRequest from '../FriendRequest/FriendRequest';
 import InviteFriend from '../InviteFriend/InviteFriend';
 import Login from '../Login/Login';
 import useToken from './useToken';
+import useUser from './useUser';
 
 function App() {
   const { token, setToken } = useToken();
+  const { user, setUser } = useUser();
   if(!token) {
-    return <Login setToken={setToken} />
+    return <Login setToken={setToken} setUser={setUser}/>
   }
 
   return (

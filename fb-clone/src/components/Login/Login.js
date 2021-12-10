@@ -28,15 +28,22 @@ function Copyright(props) {
 const theme = createTheme();
 
 async function loginUser(credentials) {
-    // var url = new URL('http://ec2-54-166-142-102.compute-1.amazonaws.com:5000/users/auth')
-    var url = new URL('http://127.0.0.2:5000/users/auth')
-
+    // var url = new URL('https://d2kjnw8vmxc1wq.cloudfront.net/api/users/auth')
+    var url = new URL('http://192.168.0.8:5000/users/auth')
+    
     url.search = new URLSearchParams(credentials).toString();
 
     return fetch(url).then(data => data.json())
 }
 
-export default function Login({ setToken }) {
+async function getUserDetail(userID) {
+    // var url = new URL('https://d2kjnw8vmxc1wq.cloudfront.net/api/users/' + userID)
+    var url = new URL('http://192.168.0.8:5000/users/' + userID)
+    
+    return fetch(url).then(data => data.json())
+}
+
+export default function Login({ setToken, setUser }) {
 
     const [email, setUserName] = useState();
     const [password, setPassword] = useState();
@@ -49,11 +56,12 @@ export default function Login({ setToken }) {
             email: data.get('email'),
             password: data.get('password'),
         });
-        console.log({
-            email: data.get('email'),
-            password: data.get('password'),
-        });
+        
         setToken(token["Authentication Token"]);
+
+        const userDetail = await getUserDetail(token["user_id"]);
+        setUser(userDetail)
+
     };
 
     const [loginData, setLoginData] = useState(
@@ -149,5 +157,6 @@ export default function Login({ setToken }) {
 }
 
 Login.propTypes = {
-    setToken: PropTypes.func.isRequired
+    setToken: PropTypes.func.isRequired,
+    setUser: PropTypes.func.isRequired
 }
