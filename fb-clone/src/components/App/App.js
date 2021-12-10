@@ -9,6 +9,7 @@ import InviteFriend from '../InviteFriend/InviteFriend';
 import Login from '../Login/Login';
 import useToken from './useToken';
 import useUser from './useUser';
+import StockPortfolio from '../StockPortfolio/StockPortfolio';
 
 function App() {
   const { token, setToken } = useToken();
@@ -28,6 +29,7 @@ function App() {
                   <Route path="/friends" exact component={FriendList} />
                   <Route path="/friends/requests" exact component={FriendRequest} />
                   <Route path="/friends/invite" exact component={InviteFriend} />
+                  <Route path="/portfolio" exact component={StockPortfolio} />
                 </Switch>
                 { /* Widget */ }
             </div>
