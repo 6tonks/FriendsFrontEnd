@@ -2,9 +2,9 @@ import React, {useState, useEffect} from 'react';
 import { Avatar, Box, Card, CardContent, Grid, Typography, TextField, InputAdornment, SvgIcon } from '@mui/material';
 import Button from '@mui/material/Button';
 import LocalAtmIcon from '@mui/icons-material/LocalAtm';
-import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
 
-function AddBalance() {
+function DeductBalance() {
     const userID = localStorage.getItem('user_id');
 
     const [moneyAmount, setMoneyAmount] = useState([]);
@@ -15,7 +15,7 @@ function AddBalance() {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ 
-            method: "addition",
+            method: "deduction",
             money_amount: moneyAmount
           })
       };
@@ -54,7 +54,7 @@ function AddBalance() {
                   gutterBottom
                   variant="overline"
                 >
-                  Deposit Money
+                  Withdraw Money
                 </Typography>
                 <Box component="form" noValidate sx={{ maxWidth: 500 }}>
                   <TextField
@@ -72,7 +72,7 @@ function AddBalance() {
                       )
                     }}
                     onChange={handleChange}
-                    placeholder="Deposit Amount"
+                    placeholder="Withdrawal Amount"
                     variant="outlined"
                     name="money_amount"
                     value={moneyAmount}
@@ -83,19 +83,19 @@ function AddBalance() {
                       variant="contained"
                       sx={{ mt: 3, mb: 2 }}
                   >
-                      Add Money
+                      Get Money
                   </Button>
                 </Box>
               </Grid>
               <Grid item>
                 <Avatar
                   sx={{
-                    backgroundColor: 'green',
+                    backgroundColor: 'error.main',
                     height: 56,
                     width: 56
                   }}
                 >
-                  <AddIcon />
+                  <RemoveIcon />
                 </Avatar>
               </Grid>
             </Grid>
@@ -118,4 +118,4 @@ function AddBalance() {
     );
 }
 
-export default AddBalance;
+export default DeductBalance;

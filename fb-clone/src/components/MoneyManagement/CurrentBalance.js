@@ -51,7 +51,7 @@ function CurrentBalance() {
               <Grid item>
                 <Avatar
                   sx={{
-                    backgroundColor: 'error.main',
+                    backgroundColor: '#2196f3',
                     height: 56,
                     width: 56
                   }}

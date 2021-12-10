@@ -2,6 +2,7 @@ import React from 'react'
 import { Box, Container, Grid } from '@mui/material';
 import CurrentBalance from './CurrentBalance';
 import AddBalance from './AddBalance';
+import DeductBalance from './DeductBalance';
 
 const MoneyAccount = () => (
     <>
@@ -51,7 +52,7 @@ const MoneyAccount = () => (
               sm={6}
               xs={12}
             >
-              100
+              <DeductBalance/>
             </Grid>
             
           </Grid>
