@@ -29,36 +29,15 @@ const buttonsTheme = createTheme({
   },
 });
 
-const RequestCard = (props) => {
+const InviteCard = (props) => {
     const classes = useStyles();
 
     const [addDecline, setAddDecline]=useState(null);
 
     const [message, setMessage]=useState("");
-
-    const accept = () =>{
-      const url = new URL("https://z4sr5g47u6.execute-api.us-east-1.amazonaws.com/api/friends/" + localStorage.getItem('user_id') + "/accept")
-      const requestOptions = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ friend_id: props.id.toString() })
-      };
-      fetch(url, requestOptions).then(
-        async function(data) {
-          console.log(data.status)
-          if (data.status >= 200 && data.status < 300) {
-            setAddDecline(true);
-            setMessage("Request Accepted");
-          } else {
-            setAddDecline(true);
-            setMessage("There is an error in processing the request, please try again!");
-          }
-        }
-      );
-    }
     
-    const decline = () => {
-      const url = new URL("https://z4sr5g47u6.execute-api.us-east-1.amazonaws.com/api/friends/" + localStorage.getItem('user_id') + "/decline")
+    const cancel = () => {
+      const url = new URL("https://z4sr5g47u6.execute-api.us-east-1.amazonaws.com/api/friends/" + localStorage.getItem('user_id') + "/cancel")
       const requestOptions = {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
@@ -69,7 +48,7 @@ const RequestCard = (props) => {
           console.log(data.status)
           if (data.status >= 200 && data.status < 300) {
             setAddDecline(false);
-            setMessage("Request Declined");
+            setMessage("Invitation Cancelled");
           } else {
             setAddDecline(false);
             setMessage("There is an error in processing the request, please try again!");
@@ -90,8 +69,7 @@ const RequestCard = (props) => {
         action={
           addDecline===null && <ThemeProvider theme={buttonsTheme}>
           <ButtonGroup aria-label="settings">
-            { props.show_acc && <Button onClick={accept} variant="outlined" color='primary'><CheckIcon/></Button>}
-            <Button onClick={decline} variant="outlined" color='secondary'><ClearIcon/></Button>
+            <Button onClick={cancel} variant="outlined" color='secondary'><ClearIcon/></Button>
           </ButtonGroup>
           </ThemeProvider>
         }
@@ -109,4 +87,4 @@ const RequestCard = (props) => {
 };
 
 
-export default RequestCard;
+export default InviteCard;

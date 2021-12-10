@@ -19,15 +19,12 @@ function Header() {
         fetchItems();
     }, []);
 
-    const [items, setItems] = useState([]);
+    const [firstName, setFirstName] = useState([]);
+    const [lastName, setLastName] = useState([]);
 
     const fetchItems = async() => {
-        const data = await fetch(
-            'https://randomuser.me/api/?nat=us&randomapi'
-        );
-
-        const items = await data.json();
-        setItems(items.results);
+        setFirstName(localStorage.getItem("first_name"));
+        setLastName(localStorage.getItem("last_name"));
     };
 
     const logout = () => {
@@ -54,11 +51,13 @@ function Header() {
                 <div className="header__option">
                     <FlagIcon fontSize="large" />
                 </div>
-                <div className="header__option">
-                    <StorefrontOutlinedIcon fontSize="large" />
-                </div>
-                <Link to="/" className="hyperlink__style">
-                    <div className="header__option header__option--active">
+                <Link to="/money" className="hyperlink__style">
+                    <div className="header__option">
+                        <StorefrontOutlinedIcon fontSize="large" />
+                    </div>
+                </Link>
+                <Link to="/friends" className="hyperlink__style">
+                    <div className="header__option">
                         <SupervisedUserCirceIcon fontSize="large" />
                     </div>
                 </Link>
@@ -66,7 +65,7 @@ function Header() {
             <div className="header__right">
                 <div className="header__info">
                     <Avatar />
-                    <h4> {items.map(item => item.login.username)} </h4>
+                    <h4> {firstName + " " + lastName} </h4>
                     <Button onClick={logout}>
                         LOGOUT
                     </Button>

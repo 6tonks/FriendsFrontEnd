@@ -9,6 +9,8 @@ import InviteFriend from '../InviteFriend/InviteFriend';
 import Login from '../Login/Login';
 import useToken from './useToken';
 import useUser from './useUser';
+import MoneyAccount from '../MoneyManagement/MoneyAccount';
+import SidebarMoney from '../SidebarMoney/SidebarMoney';
 import StockPortfolio from '../StockPortfolio/StockPortfolio';
 
 function App() {
@@ -22,17 +24,40 @@ function App() {
     <Router>
       <div className="app">
       <Header />
-            <div className="app__body">
-                <Sidebar />
-                <Switch>
-                  <Route path="/login" exact component={Login} />
-                  <Route path="/friends" exact component={FriendList} />
-                  <Route path="/friends/requests" exact component={FriendRequest} />
-                  <Route path="/friends/invite" exact component={InviteFriend} />
-                  <Route path="/portfolio" exact component={StockPortfolio} />
-                </Switch>
-                { /* Widget */ }
-            </div>
+          <Switch>
+              <Route path="/login" exact component={Login} />
+              <Route path="/friends" exact >
+                <div className="app__body">
+                  <Sidebar />
+                  <FriendList/>
+                </div>
+              </Route>
+              <Route path="/friends/requests" exact >
+                <div className="app__body">
+                  <Sidebar />
+                  <FriendRequest/>
+                </div>
+              </Route>
+              <Route path="/friends/invite" exact >
+                <div className="app__body">
+                  <Sidebar />
+                  <InviteFriend/>
+                </div>
+              </Route>
+              <Route path="/money" exact>
+                <div className="app__body">
+                  <SidebarMoney/>
+                  <MoneyAccount/>
+                </div>
+              </Route>
+              <Route path="/portfolio" exact>
+                <div className="app__body">
+                  <SidebarMoney/>
+                  <StockPortfolio/>
+                </div>
+              </Route>
+          </Switch>
+            
       </div>
     </Router>
   );
