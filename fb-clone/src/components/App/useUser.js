@@ -23,8 +23,13 @@ export default function useUser() {
     setUser(user);
   };
 
+  const getUserID = () => {
+    return localStorage.getItem('user_id')
+  }
+
   return {
     setUser: saveUser,
+    getUserID,
     user
   }
 }

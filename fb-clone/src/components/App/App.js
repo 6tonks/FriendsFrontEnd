@@ -12,7 +12,7 @@ import useUser from './useUser';
 
 function App() {
   const { token, setToken } = useToken();
-  const { user, setUser } = useUser();
+  const { user, getUserID, setUser } = useUser();
   if(!token) {
     return <Login setToken={setToken} setUser={setUser}/>
   }
