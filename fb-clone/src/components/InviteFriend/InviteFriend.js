@@ -1,25 +1,6 @@
-// import React from "react";
-// import {Grid} from "@mui/material";
-
-
-// const InviteFriend = () => {
-//     return (
-//         <Grid container direction="column">
-//             <Grid item  container>
-//                 <Grid item container xs={12} sm={8}>
-//                     <h1>Invite Friend Page Placeholder!</h1>
-//                 </Grid>
-//                 <Grid item xs={false} sm={2}/>
-//             </Grid>
-//         </Grid>
-//     );
-// };
-
-// export default InviteFriend;
-
 import {Grid} from '@mui/material';
 import React, {useState, useEffect} from 'react';
-import RequestCard from '../RequestCard';
+import InviteCard from '../InviteCard';
 import AddIcon from '@mui/icons-material/Add';
 import IconButton from '@mui/material/IconButton';
 import PersonSearchIcon from '@mui/icons-material/PersonSearch';
@@ -32,13 +13,48 @@ const InviteFriend = () => {
         fetchItems();
     }, []);
 
+    async function getUserDetail(userID) {
+        // var url = new URL('https://d2kjnw8vmxc1wq.cloudfront.net/api/users/' + userID)
+        var url = new URL('http://192.168.0.8:5000/users/' + userID)
+        
+        return fetch(url).then(
+            async function(data) {
+                var temp_data = await data.json()
+                if (temp_data.error == null) {
+                    const address_id = temp_data.addressID
+                    const address_url = new URL('https://d2kjnw8vmxc1wq.cloudfront.net/api/addresses/' + address_id)
+                
+                    const address = await fetch(address_url).then(address_data => address_data.json());
+                    if (address.error == null) {
+                        temp_data.address = address.city + " " + address.state + " " + address.countryCode
+                    } else {
+                        temp_data.address = ""
+                    }
+                } else {
+                    temp_data = null
+                }
+                return temp_data
+            }
+        )
+    }
+
     const fetchItems = async() => {
         const data = await fetch(
-            'https://randomuser.me/api/?nat=us&randomapi&results=2'
-        );
+            // 'https://randomuser.me/api/?nat=us&randomapi&results=30'
+            'https://d2kjnw8vmxc1wq.cloudfront.net/api/friends/' + localStorage.getItem('user_id') + '/pending_request'
+        ).then(data => data.json());
 
-        const items = await data.json();
-        setItems(items.results);
+        const friendList = await data.friend_list;
+        
+        var items = []
+        
+        for (const friend of friendList) {
+            const userDetail = await getUserDetail(friend.user_id)
+            if (userDetail) {
+                items.push(userDetail)
+            }
+        }
+        setItems(items);
     };
 
     function formatDate(string){
@@ -58,10 +74,12 @@ const InviteFriend = () => {
                 </IconButton>
 
                 {items.map(item => (
-                    <RequestCard 
-                        key={item.login.username}
-                        date={formatDate(item.registered.date)}
-                        name={item.login.username}
+                    <InviteCard 
+                        key={item.userID}
+                        id={item.userID}
+                        name={item.nameFirst + " " + item.nameLast}
+                        text={item.address}
+                        show_acc={1}
                     />
                 ))}
 
