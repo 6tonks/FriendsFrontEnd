@@ -14,8 +14,7 @@ const InviteFriend = () => {
     }, []);
 
     async function getUserDetail(userID) {
-        // var url = new URL('https://d2kjnw8vmxc1wq.cloudfront.net/api/users/' + userID)
-        var url = new URL('http://192.168.0.8:5000/users/' + userID)
+        var url = new URL('https://d2kjnw8vmxc1wq.cloudfront.net/api/users/' + userID)
         
         return fetch(url).then(
             async function(data) {
@@ -40,7 +39,6 @@ const InviteFriend = () => {
 
     const fetchItems = async() => {
         const data = await fetch(
-            // 'https://randomuser.me/api/?nat=us&randomapi&results=30'
             'https://d2kjnw8vmxc1wq.cloudfront.net/api/friends/' + localStorage.getItem('user_id') + '/pending_request'
         ).then(data => data.json());
 
