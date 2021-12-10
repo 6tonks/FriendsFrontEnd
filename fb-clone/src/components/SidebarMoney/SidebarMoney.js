@@ -5,6 +5,7 @@ import {Link} from 'react-router-dom';
 
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import ShowChartIcon from '@mui/icons-material/ShowChart';
+import ConnectWithoutContactIcon from "@mui/icons-material/ConnectWithoutContact";
 
 function SidebarMoney() {
     return (
@@ -12,8 +13,8 @@ function SidebarMoney() {
             <Link to="/money" className="hyperlink__style">
                 <SidebarRow Icon={AttachMoneyIcon} title="Current Account Balance" />
             </Link>
-            <Link to="/porto" className="hyperlink__style">
-                <SidebarRow Icon={ShowChartIcon} title="Stock Portfolio" />
+            <Link to="/portfolio" className="hyperlink__style">
+                <SidebarRow Icon={ConnectWithoutContactIcon} title="My Portfolio" />
             </Link>
         </div>
     );

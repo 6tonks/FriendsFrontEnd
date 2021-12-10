@@ -19,9 +19,6 @@ function Sidebar() {
             <Link to="/friends/invite" className="hyperlink__style">
                 <SidebarRow Icon={ConnectWithoutContactIcon} title="Outgoing Invite" />
             </Link>
-            <Link to="/portfolio" className="hyperlink__style">
-                <SidebarRow Icon={ConnectWithoutContactIcon} title="My Portfolio" />
-            </Link>
         </div>
     );
 }
