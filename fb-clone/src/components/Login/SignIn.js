@@ -24,7 +24,7 @@ function Copyright(props) {
   }
 
 async function loginUser(credentials) {
-    var url = new URL(' https://z4sr5g47u6.execute-api.us-east-1.amazonaws.com/api/users/auth')
+    var url = new URL(' https://d2kjnw8vmxc1wq.cloudfront.net/api/users/auth')
     
     url.search = new URLSearchParams(credentials).toString();
 
@@ -32,7 +32,7 @@ async function loginUser(credentials) {
 }
 
 async function getUserDetail(userID) {
-    var url = new URL(' https://z4sr5g47u6.execute-api.us-east-1.amazonaws.com/api/users/' + userID)
+    var url = new URL(' https://d2kjnw8vmxc1wq.cloudfront.net/api/users/' + userID)
     
     return fetch(url).then(data => data.json())
 }

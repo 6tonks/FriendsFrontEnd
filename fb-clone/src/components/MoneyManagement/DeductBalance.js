@@ -20,7 +20,7 @@ function DeductBalance() {
           })
       };
       
-      var url = new URL(' https://z4sr5g47u6.execute-api.us-east-1.amazonaws.com/api/money/' + userID)
+      var url = new URL(' https://d2kjnw8vmxc1wq.cloudfront.net/api/money/' + userID)
 
       const data = await fetch(url, requestOptions);
 

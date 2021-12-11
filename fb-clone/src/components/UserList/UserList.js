@@ -14,57 +14,8 @@ const UserList = () => {
         fetchItems();
     }, []);
 
-    async function fetchUserFriends () {
-        const data = await fetch(
-            'https://d2kjnw8vmxc1wq.cloudfront.net/api/friends/' + localStorage.getItem('user_id')
-        ).then(data => data.json());
-
-        const friendList = await data.friend_list;
-        var items = []
-        
-        for (const friend of friendList) {
-            items.push(parseInt(friend.user_id))
-        }
-        
-        console.log(items)
-        setFriends(items);
-    }
-
-    async function fetchIncomingRequests () {
-        const data = await fetch(
-            'https://d2kjnw8vmxc1wq.cloudfront.net/api/friends/' + localStorage.getItem('user_id') + '/pending'
-        ).then(data => data.json());
-
-        const friendList = await data.friend_list;
-        var items = []
-        
-        for (const friend of friendList) {
-            items.push(parseInt(friend.user_id))
-        }
-        
-        console.log(items)
-        setInReqs(items);
-    }
-
-    async function fetchOutgoingRequests () {
-        const data = await fetch(
-            'https://d2kjnw8vmxc1wq.cloudfront.net/api/friends/' + localStorage.getItem('user_id') + '/pending_request'
-        ).then(data => data.json());
-
-        const friendList = await data.friend_list;
-        var items = []
-        
-        for (const friend of friendList) {
-            items.push(parseInt(friend.user_id))
-        }
-        
-        console.log(items)
-        setOutReqs(items);
-    }
-
     const params = new URLSearchParams(window.location.search) // id=123
     const firstName = params.get('firstName')
-    const isFriend = 0
     const fetchItems = async() => {
         var items = []
         

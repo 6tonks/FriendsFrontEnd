@@ -6,7 +6,7 @@ function ContactCards({ id, image, profileSrc, title, subtitle }) {
     const [deleted, setDeleted] = useState(false);
 
     const deleteFriend = () => {
-      const url = new URL("https://z4sr5g47u6.execute-api.us-east-1.amazonaws.com/api/friends/" + localStorage.getItem('user_id') + "/delete")
+      const url = new URL("https://d2kjnw8vmxc1wq.cloudfront.net/api/friends/" + localStorage.getItem('user_id') + "/delete")
       const requestOptions = {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
