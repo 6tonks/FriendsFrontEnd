@@ -45,9 +45,11 @@ function Header() {
                 </div>
             </div>
             <div className="header__center">
-                <div className="header__option">
-                    <HomeIcon fontSize="large" />
-                </div>
+                <Link to="/" className="hyperlink__style">
+                    <div className="header__option">
+                        <HomeIcon fontSize="large" />
+                    </div>
+                </Link>
                 <div className="header__option">
                     <FlagIcon fontSize="large" />
                 </div>
@@ -66,9 +68,11 @@ function Header() {
                 <div className="header__info">
                     <Avatar />
                     <h4> {firstName + " " + lastName} </h4>
-                    <Button onClick={logout}>
-                        LOGOUT
-                    </Button>
+                    <Link to="/">
+                        <Button onClick={logout}>
+                            LOGOUT
+                        </Button>
+                    </Link>
                 </div>
                 <IconButton>
                     <AddIcon />

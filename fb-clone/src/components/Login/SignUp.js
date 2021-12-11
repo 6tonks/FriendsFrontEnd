@@ -41,23 +41,24 @@ export default function SignUp() {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     // eslint-disable-next-line no-console
-    console.log({
+    // console.log({
+    //   email: data.get('email'),
+    //   password: data.get('password'),
+    //   firstName: data.get('firstName'),
+    //   lastName: data.get('lastName'),
+    // });
+
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+    };
+    const qparams = JSON.stringify({
       email: data.get('email'),
       password: data.get('password'),
       firstName: data.get('firstName'),
       lastName: data.get('lastName'),
     });
-
-    const requestOptions = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          email: data.get('email'),
-          password: data.get('password'),
-          firstName: data.get('firstName'),
-          lastName: data.get('lastName'),
-        })
-    };
+    console.log(qparams)
   };
 
   return (
