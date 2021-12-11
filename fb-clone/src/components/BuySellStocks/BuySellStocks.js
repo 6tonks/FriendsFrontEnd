@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import axios from 'axios';
 
 const BuySellStocks = () => {
     const [items, setItems] = useState([]);
@@ -21,59 +22,62 @@ const BuySellStocks = () => {
     };
 
     const buyStock = async() => {
-        getStockPrice();
-        var url = 'https://d2kjnw8vmxc1wq.cloudfront.net/api/transaction/v1/buy/' + localStorage.getItem('user_id');
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', url, true);
+        axios(
+            //'http://127.0.0.1:5000/api/stocks/' + items["ticker"]
+            'https://d2kjnw8vmxc1wq.cloudfront.net/api/stocks/' + items["ticker"]
+        ).then(data => {
+            console.log(data)
+            items["price"] = data.data.latest_price;
+            var url = 'https://d2kjnw8vmxc1wq.cloudfront.net/api/transaction/v1/buy/' + localStorage.getItem('user_id');
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', url, true);
 
-        xhr.setRequestHeader("Accept", "application/json");
-        xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.setRequestHeader("Accept", "application/json");
+            xhr.setRequestHeader("Content-Type", "application/json");
 
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4) {
-                console.log(xhr.status);
-                console.log(xhr.responseText);
-            }
-        };
-        var data = JSON.stringify({
-                                            "ticker": items["ticker"],
-                                            "quantity": items["quantity"],
-                                            "price": items["price"]
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    console.log(xhr.status);
+                    console.log(xhr.responseText);
+                }
+            };
+            var data = JSON.stringify({
+                "ticker": items["ticker"],
+                "quantity": items["quantity"],
+                "price": items["price"]
+            });
+            xhr.send(data);
         });
-        xhr.send(data);
     }
 
     const sellStock = async() => {
-        getStockPrice();
-        var url = 'https://d2kjnw8vmxc1wq.cloudfront.net/api/transaction/v1/buy/' + localStorage.getItem('user_id');
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', url, true);
-
-        xhr.setRequestHeader("Accept", "application/json");
-        xhr.setRequestHeader("Content-Type", "application/json");
-
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4) {
-                console.log(xhr.status);
-                console.log(xhr.responseText);
-            }
-        };
-        var data = JSON.stringify({
-            "ticker": items["ticker"],
-            "quantity": items["quantity"],
-            "price": items["price"]
-        });
-        xhr.send(data);
-    }
-
-    const getStockPrice = async() => {
-        const data = await fetch(
+        axios(
             //'http://127.0.0.1:5000/api/stocks/' + items["ticker"]
             'https://d2kjnw8vmxc1wq.cloudfront.net/api/stocks/' + items["ticker"]
-        ).then(data => data.json());
-        console.log(data);
-        console.log(data.latest_price);
-        items["price"] = data.latest_price;
+        ).then(data => {
+            console.log(data)
+            items["price"] = data.data.latest_price;
+            var url = 'https://d2kjnw8vmxc1wq.cloudfront.net/api/transaction/v1/sell/' + localStorage.getItem('user_id');
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', url, true);
+
+            xhr.setRequestHeader("Accept", "application/json");
+            xhr.setRequestHeader("Content-Type", "application/json");
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    console.log(xhr.status);
+                    console.log(xhr.responseText);
+                }
+            };
+            var data = JSON.stringify({
+                "ticker": items["ticker"],
+                "quantity": items["quantity"],
+                "price": items["price"]
+            });
+            xhr.send(data);
+        });
+        
     }
 
     return (
