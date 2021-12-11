@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, {useState, useEffect} from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -13,6 +13,8 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useHistory } from "react-router-dom";
+import validator from 'validator';
+import usePasswordValidator from 'react-use-password-validator';
 
 function Copyright(props) {
   return (
@@ -37,28 +39,64 @@ export default function SignUp() {
     history.push(path);
   }
 
-  const handleSubmit = (event) => {
+  const [passwordError, setPasswordError] = useState('')
+  const [ isValid, setIsValid ] = usePasswordValidator({
+    min: 8,
+    max: 256,
+    digits: 1,
+    symbols: 1,
+    uppercase: 1,
+    lowercase: true,
+    spaces: false
+  })
+  const handlePassword = (event) => {
+    var passw = event.target.value
+    setIsValid(passw)
+    if(isValid){
+      setPasswordError('')
+    } else {
+      setPasswordError('Must contain uppercase, number, symbol, and length should be at least 8')
+    }
+  };
+
+  const [emailError, setEmailError] = useState('')
+  const handleEmail = (event) => {
+    var email = event.target.value
+    if (validator.isEmail(email)) {
+      setEmailError('')
+    } else {
+      setEmailError('Enter valid Email!')
+    }
+  };
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    // console.log({
-    //   email: data.get('email'),
-    //   password: data.get('password'),
-    //   firstName: data.get('firstName'),
-    //   lastName: data.get('lastName'),
-    // });
 
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
     };
-    const qparams = JSON.stringify({
+    var qparams = {
       email: data.get('email'),
-      password: data.get('password'),
+      password: '"' + data.get('password') + '"',
       firstName: data.get('firstName'),
       lastName: data.get('lastName'),
-    });
-    console.log(qparams)
+    };
+    
+    var url = new URL('https://d2kjnw8vmxc1wq.cloudfront.net/api/users')
+    url.search = new URLSearchParams(qparams).toString();
+
+    const resp = await fetch(url, requestOptions);
+    const statusCode = resp.status
+    
+    if (statusCode===400){
+      alert("Email/Password Incorrect")
+    } else {
+      alert("User Created")
+      routeChange()
+    }
+
   };
 
   return (
@@ -110,7 +148,9 @@ export default function SignUp() {
                   label="Email Address"
                   name="email"
                   autoComplete="email"
+                  onChange={handleEmail}
                 />
+                <p>{emailError}</p>
               </Grid>
               <Grid item xs={12}>
                 <TextField
@@ -121,7 +161,9 @@ export default function SignUp() {
                   type="password"
                   id="password"
                   autoComplete="new-password"
+                  onChange={handlePassword}
                 />
+                <p>{passwordError}</p>
               </Grid>
               <Grid item xs={12}>
                 <FormControlLabel
@@ -135,7 +177,6 @@ export default function SignUp() {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
-              // onClick={routeChange}
             >
               Sign Up
             </Button>

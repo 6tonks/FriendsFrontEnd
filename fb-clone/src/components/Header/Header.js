@@ -12,9 +12,16 @@ import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import {Link} from 'react-router-dom';
 import Button from '@mui/material/Button';
-
+import { useHistory } from "react-router-dom";
 
 function Header() {
+    const history = useHistory();
+
+    const routeChange = () =>{ 
+        let path = `/`; 
+        history.push(path);
+    }
+
     useEffect(() => {
         fetchItems();
     }, []);
@@ -29,6 +36,7 @@ function Header() {
 
     const logout = () => {
         localStorage.removeItem('token');
+        routeChange();
         window.location.reload(false);
     };
 
@@ -68,11 +76,9 @@ function Header() {
                 <div className="header__info">
                     <Avatar />
                     <h4> {firstName + " " + lastName} </h4>
-                    <Link to="/">
-                        <Button onClick={logout}>
-                            LOGOUT
-                        </Button>
-                    </Link>
+                    <Button onClick={logout}>
+                        LOGOUT
+                    </Button>
                 </div>
                 <IconButton>
                     <AddIcon />
