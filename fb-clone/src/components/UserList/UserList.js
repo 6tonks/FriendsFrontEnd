@@ -1,6 +1,7 @@
 // import useFetch from 'react-fetch-hook';
 import React, {useState, useEffect} from 'react';
 import UserCards from '../UserCards/UserCards';
+import axios from 'axios';
 import './UserList.css';
 
 const UserList = () => {
@@ -65,23 +66,50 @@ const UserList = () => {
     const firstName = params.get('firstName')
     const isFriend = 0
     const fetchItems = async() => {
-        fetchUserFriends()
-        fetchIncomingRequests()
-        fetchOutgoingRequests()
+        var items = []
+        
+        axios.get(
+            'https://d2kjnw8vmxc1wq.cloudfront.net/api/friends/' + localStorage.getItem('user_id')
+        ).then(data => {
+            const friendList = data.data.friend_list
+            for (const friend of friendList) {
+                items.push(parseInt(friend.user_id))
+            }
 
-        const url = new URL('https://d2kjnw8vmxc1wq.cloudfront.net/api/users')
+            axios.get(
+                'https://d2kjnw8vmxc1wq.cloudfront.net/api/friends/' + localStorage.getItem('user_id') + '/pending'
+            ).then(data => {
+                const friendList = data.data.friend_list
+                for (const friend of friendList) {
+                    items.push(parseInt(friend.user_id))
+                }
 
-        if (firstName) {
-            url.searchParams.append('firstName', firstName);
-        }
-        const data = await fetch(
-            url
-        ).then(data => data.json());
+                axios.get(
+                    'https://d2kjnw8vmxc1wq.cloudfront.net/api/friends/' + localStorage.getItem('user_id') + '/pending_request'
+                ).then(data => {
+                    const friendList = data.data.friend_list
+                    for (const friend of friendList) {
+                        items.push(parseInt(friend.user_id))
+                    }
 
-        const items = await data.users;
-        console.log(data)
-        console.log(items)
-        setItems(items);
+                    setFriends(items)
+
+                    var params = {}
+                    if (firstName) {
+                        params = {
+                            firstName: firstName
+                        }
+                    }
+                    axios.get(
+                        'https://d2kjnw8vmxc1wq.cloudfront.net/api/users', { params: params }
+                    ).then(data => {
+                        const users = data.data.users
+                        console.log(users)
+                        setItems(users);
+                    });
+                })
+            })
+        });
     };
 
     return (

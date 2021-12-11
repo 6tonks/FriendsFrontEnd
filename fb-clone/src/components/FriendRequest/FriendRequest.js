@@ -18,11 +18,15 @@ const FriendRequest = () => {
                 var temp_data = await data.json()
                 if (temp_data.error == null) {
                     const address_id = temp_data.addressID
-                    const address_url = new URL('https://d2kjnw8vmxc1wq.cloudfront.net/api/addresses/' + address_id)
+                    if (address_id > 0) {
+                        const address_url = new URL('https://d2kjnw8vmxc1wq.cloudfront.net/api/addresses/' + address_id)
                 
-                    const address = await fetch(address_url).then(address_data => address_data.json());
-                    if (address.error == null) {
-                        temp_data.address = address.city + " " + address.state + " " + address.countryCode
+                        const address = await fetch(address_url).then(address_data => address_data.json());
+                        if (address.error == null) {
+                            temp_data.address = address.city + " " + address.state + " " + address.countryCode
+                        } else {
+                            temp_data.address = ""
+                        }
                     } else {
                         temp_data.address = ""
                     }
