@@ -13,12 +13,15 @@ import MoneyAccount from '../MoneyManagement/MoneyAccount';
 import SidebarMoney from '../SidebarMoney/SidebarMoney';
 import StockPortfolio from '../StockPortfolio/StockPortfolio';
 import BuySellStocks from '../BuySellStocks/BuySellStocks';
+import UserList from '../UserList/UserList';
 
 function App() {
   const { token, setToken } = useToken();
   const { user, getUserID, setUser } = useUser();
   if(!token) {
-    return <Login setToken={setToken} setUser={setUser}/>
+    return (
+      <Login setToken={setToken} setUser={setUser}/>
+    )
   }
 
   return (
@@ -26,7 +29,12 @@ function App() {
       <div className="app">
       <Header />
           <Switch>
-              <Route path="/login" exact component={Login} />
+              <Route path="/users" exact >
+                <div className="app__body">
+                  <Sidebar />
+                  <UserList/>
+                </div>
+              </Route>
               <Route path="/friends" exact >
                 <div className="app__body">
                   <Sidebar />

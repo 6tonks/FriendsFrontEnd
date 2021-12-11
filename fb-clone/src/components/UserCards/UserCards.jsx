@@ -1,14 +1,15 @@
-import { React, useState } from 'react';
-import './ContactCards.css';
-import { Avatar, Button } from '@mui/material';
+import React, { useState } from 'react';
+import './UserCards.css';
+import { Avatar, Fab } from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
 
-function ContactCards({ id, image, profileSrc, title, subtitle }) {
-    const [deleted, setDeleted] = useState(false);
+function UserCards({ id, image, profileSrc, title, subtitle, isFriend }) {
+    const [added, setAdded] = useState(false);
 
-    const deleteFriend = () => {
-      const url = new URL("https://z4sr5g47u6.execute-api.us-east-1.amazonaws.com/api/friends/" + localStorage.getItem('user_id') + "/delete")
+    const addFriend = () => {
+      const url = new URL("https://z4sr5g47u6.execute-api.us-east-1.amazonaws.com/api/friends/" + localStorage.getItem('user_id') + "/add")
       const requestOptions = {
-        method: 'DELETE',
+        method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ friend_id: id.toString() })
       };
@@ -17,9 +18,9 @@ function ContactCards({ id, image, profileSrc, title, subtitle }) {
         async function(data) {
           console.log(data.status)
           if (data.status >= 200 && data.status < 300) {
-            setDeleted(true);
+            setAdded(true);
           } else {
-            setDeleted(true);
+            setAdded(true);
             alert("There is an error in processing the request, please try again!");
           }
         }
@@ -32,14 +33,14 @@ function ContactCards({ id, image, profileSrc, title, subtitle }) {
             <h4> {title} </h4>
             <h5> {subtitle} </h5>
             <div>
-                { !deleted &&
-                    <Button variant="outlined" color="error" onClick={deleteFriend}>
-                        Delete
-                    </Button>
+                {!isFriend && !added && 
+                    <Fab color="primary" aria-label="add">
+                        <AddIcon onClick={addFriend} />
+                    </Fab>
                 }
             </div>
         </div>
     );
 }
 
-export default ContactCards;
+export default UserCards;
