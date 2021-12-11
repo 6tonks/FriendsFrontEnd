@@ -37,11 +37,11 @@ export default function Login({ setToken, setUser }) {
                         }}
                     />
                     <Switch>
-                        <Route path="/" exact >
-                            <SignIn setToken={setToken} setUser={setUser} />
-                        </Route>
                         <Route path="/signup" exact >
                             <SignUp />
+                        </Route>
+                        <Route path="/" >
+                            <SignIn setToken={setToken} setUser={setUser} />
                         </Route>
                     </Switch>
                 </Grid>
