@@ -45,7 +45,7 @@ const BuySellStocks = () => {
 
     const sellStock = async() => {
         await getStockPrice();
-        var url = 'https://d2kjnw8vmxc1wq.cloudfront.net/api/transaction/v1/buy/' + localStorage.getItem('user_id');
+        var url = 'https://d2kjnw8vmxc1wq.cloudfront.net/api/transaction/v1/sell/' + localStorage.getItem('user_id');
         var xhr = new XMLHttpRequest();
         xhr.open('POST', url, true);
 
