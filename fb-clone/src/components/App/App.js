@@ -12,6 +12,7 @@ import useUser from './useUser';
 import MoneyAccount from '../MoneyManagement/MoneyAccount';
 import SidebarMoney from '../SidebarMoney/SidebarMoney';
 import StockPortfolio from '../StockPortfolio/StockPortfolio';
+import UserList from '../UserList/UserList';
 
 function App() {
   const { token, setToken } = useToken();
@@ -27,6 +28,12 @@ function App() {
       <div className="app">
       <Header />
           <Switch>
+              <Route path="/users" exact >
+                <div className="app__body">
+                  <Sidebar />
+                  <UserList/>
+                </div>
+              </Route>
               <Route path="/friends" exact >
                 <div className="app__body">
                   <Sidebar />

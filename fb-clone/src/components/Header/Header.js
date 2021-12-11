@@ -12,19 +12,37 @@ import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import {Link} from 'react-router-dom';
 import Button from '@mui/material/Button';
-
+import { useHistory } from 'react-router-dom';
 
 function Header() {
     useEffect(() => {
         fetchItems();
     }, []);
 
+    const history = useHistory();
+
     const [firstName, setFirstName] = useState([]);
     const [lastName, setLastName] = useState([]);
+    var [query, setQuery] = useState('');
+    const handleChange = (e) => setQuery(e.target.value);
 
     const fetchItems = async() => {
         setFirstName(localStorage.getItem("first_name"));
         setLastName(localStorage.getItem("last_name"));
+    };
+
+    const clicked = () => { 
+        if (query == '') {
+            history.push({
+                pathname: '/users'
+            })
+        } else {
+            history.push({
+                pathname: '/users',
+                search: '?firstName=' + query
+            })
+        }
+        window.location.reload(false);
     };
 
     const logout = () => {
@@ -40,8 +58,10 @@ function Header() {
                     alt=""
                 />
                 <div className="header__input">
-                    <SearchIcon />
-                    <input placeholder="Search Stonks!" type="text" />
+                    <input placeholder="Search Stonks!" type="text" value={query} onChange={handleChange} />
+                    <IconButton onClick={clicked}>
+                      <SearchIcon />
+                    </IconButton>
                 </div>
             </div>
             <div className="header__center">
