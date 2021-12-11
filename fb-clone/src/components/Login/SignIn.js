@@ -45,16 +45,19 @@ function SignIn({ setToken, setUser }) {
     const handleSubmit = async (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        // eslint-disable-next-line no-console
+
         const token = await loginUser({
             email: data.get('email'),
-            password: data.get('password'),
+            password: '"' + data.get('password') + '"',
         });
-        
-        setToken(token["Authentication Token"]);
 
-        const userDetail = await getUserDetail(token["user_id"]);
-        setUser(userDetail)
+        if (token["Authentication Token"]){
+            setToken(token["Authentication Token"]);
+            const userDetail = await getUserDetail(token["user_id"]);
+            setUser(userDetail)
+        } else {
+            alert("Email/Password Incorrect")
+        }
 
     };
 
