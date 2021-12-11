@@ -26,8 +26,6 @@ function Header() {
         fetchItems();
     }, []);
 
-    const history = useHistory();
-
     const [firstName, setFirstName] = useState([]);
     const [lastName, setLastName] = useState([]);
     var [query, setQuery] = useState('');
