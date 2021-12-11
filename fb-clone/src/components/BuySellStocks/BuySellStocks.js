@@ -22,7 +22,7 @@ const BuySellStocks = () => {
 
     const buyStock = async() => {
         getStockPrice();
-        var url = 'https://d2kjnw8vmxc1wq.cloudfront.net/api/transaction/v3/buy/' + localStorage.getItem('user_id');
+        var url = 'https://d2kjnw8vmxc1wq.cloudfront.net/api/transaction/v1/buy/' + localStorage.getItem('user_id');
         var xhr = new XMLHttpRequest();
         xhr.open('POST', url, true);
 
@@ -45,7 +45,7 @@ const BuySellStocks = () => {
 
     const sellStock = async() => {
         getStockPrice();
-        var url = 'https://d2kjnw8vmxc1wq.cloudfront.net/api/transaction/v3/buy/' + localStorage.getItem('user_id');
+        var url = 'https://d2kjnw8vmxc1wq.cloudfront.net/api/transaction/v1/buy/' + localStorage.getItem('user_id');
         var xhr = new XMLHttpRequest();
         xhr.open('POST', url, true);
 
@@ -68,8 +68,8 @@ const BuySellStocks = () => {
 
     const getStockPrice = async() => {
         const data = await fetch(
-            'http://127.0.0.1:5000/api/stocks/' + items["ticker"]
-            //'https://d2kjnw8vmxc1wq.cloudfront.net/api/stocks/' + items["ticker"]
+            //'http://127.0.0.1:5000/api/stocks/' + items["ticker"]
+            'https://d2kjnw8vmxc1wq.cloudfront.net/api/stocks/' + items["ticker"]
         ).then(data => data.json());
         console.log(data);
         console.log(data.latest_price);
