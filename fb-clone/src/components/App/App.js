@@ -12,6 +12,7 @@ import useUser from './useUser';
 import MoneyAccount from '../MoneyManagement/MoneyAccount';
 import SidebarMoney from '../SidebarMoney/SidebarMoney';
 import StockPortfolio from '../StockPortfolio/StockPortfolio';
+import BuySellStocks from '../BuySellStocks/BuySellStocks';
 import UserList from '../UserList/UserList';
 
 function App() {
@@ -63,6 +64,12 @@ function App() {
                   <SidebarMoney/>
                   <StockPortfolio/>
                 </div>
+              </Route>
+              <Route path="/transactions" exact>
+                  <div className="app__body">
+                      <SidebarMoney/>
+                      <BuySellStocks/>
+                  </div>
               </Route>
           </Switch>
             
