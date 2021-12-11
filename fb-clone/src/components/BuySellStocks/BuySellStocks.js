@@ -21,7 +21,7 @@ const BuySellStocks = () => {
     };
 
     const buyStock = async() => {
-        getStockPrice();
+        await getStockPrice();
         var url = 'https://d2kjnw8vmxc1wq.cloudfront.net/api/transaction/v1/buy/' + localStorage.getItem('user_id');
         var xhr = new XMLHttpRequest();
         xhr.open('POST', url, true);
@@ -44,7 +44,7 @@ const BuySellStocks = () => {
     }
 
     const sellStock = async() => {
-        getStockPrice();
+        await getStockPrice();
         var url = 'https://d2kjnw8vmxc1wq.cloudfront.net/api/transaction/v1/buy/' + localStorage.getItem('user_id');
         var xhr = new XMLHttpRequest();
         xhr.open('POST', url, true);
